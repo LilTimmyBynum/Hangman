@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<!-- Note:  Need to finish ---  
+		   - create/set counter for win/lose words   
+		   - need to set 'loop' to get next word -->
+
+
+
+
+
+
+<head>
+	<title>Blastman</title>
+	 <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush|Calligraffitti|Droid+Sans|Macondo" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="jumbotron myBorder">
+
+<div class="page-header text-center myHeader">
+  <h1>KamehamehaMan</h1>
+</div>
+
+
+  <div class="panel-body">
+  	 <div class="panel-body gameWindow">
+		  <div align="center" class="embed-responsive embed-responsive-16by9">
+		    <video id="saiyan" class="embed-responsive-item" >
+		        <source src="assets/Kamehameha_clip0.mp4" type="video/mp4">
+		    </video>
+		    <audio id="shotty">
+		    	<source src="assets/shotgun.mp3" type="audio/mpeg">
+		    </audio>
+		</div>
+	</div>
+	<div id= "letterBox" class="letterWindow">
+	  		<h5>Letters available: </h5>
+	  		<div>
+	  	  	<button id="A" type="submit" value="A" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">A</button>
+		  	<button id="B" type="button" value="B" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">B</button>
+		  	<button id="C" type="button" value="C" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">C</button>
+		  	<button id="D" type="button" value="D" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">D</button>
+		  	<button id="E" type="button" value="E" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">E</button>
+		  	<button id="F" type="button" value="F" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">F</button>	
+		  	  
+		  <button id="G" type="button" value="G" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">G</button>
+		  <button id="H" type="button" value="H" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">H</button>
+		  <button id="I" type="button" value="I" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">I</button>
+		  <button id="J" type="button" value="J" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">J</button>
+		  <button id="K" type="button" value="K" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">K</button>
+		  <button id="L" type="button" value="L" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">L</button>
+		  
+		  <button id="M" type="button" value="M" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">M</button>
+		  <button id="N" type="button" value="N" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">N</button>
+		  <button id="O" type="button" value="O" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">O</button>
+		  <button id="P" type="button" value="P" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">P</button>
+		  <button id="Q" type="button" value="Q" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">Q</button>
+		  <button id="R" type="button" value="R" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">R</button>
+		  
+		  <button id="S" type="button" value="S" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">S</button>
+		  <button id="T" type="button" value="T" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">T</button>
+		  <button id="U" type="button" value="U" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">U</button>
+		  <button id="V" type="button" value="V" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">V</button>
+		  
+		  <button id="W" type="button" value="W" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">W</button>
+		  <button id="X" type="button" value="X" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">X</button>
+		  <button id="Y" type="button" value="Y" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">Y</button>
+		  <button id="Z" type="button" value="Z" class="btn btn-primary btn-sm myLetterBtn" onclick="myButtonFunction(value)">Z</button>
+		  </div>		
+	</div>
+		<div id= "infoBox" class="infoWindow">		
+			<h5 id="lettersUsed">Letters used: </h5>
+			<h5 id="remainingGuesses">Guesses remaining: 6</h5>
+			<h5 id="correctWords">Words found: 0</h5>
+			<div id= "currentWord"></div>
+		</div>
+</div> 
+
+<div class="panel panel-default myFooter">
+  <div class="panel-body">
+    <p id="chosenWord"></p>
+  </div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+var hangWords = ["SIDEWALK", "JUNGLE", "DERELICT", "AUTOMOBILE", "PERFORMER", "GARBAGE", "RODENT", "PIGEON", "PLAYGROUND", "CONCRETE", "SKYSCRAPER", "FIGHTER", "WARRIOR", ];
+
+// var vidClips = ["Kamehameha_clip1.mp4", "Kamehameha_clip2.mp4", "Kamehameha_clip3.mp4", "Kamehameha_clip4.mp4", "Kamehameha_clip5.mp4", "Kamehameha_6.mp4"];
+
+var badCounter = 0;
+var foundWords = 0;
+
+// function to get video clip to play
+
+
+
+// load button functionality
+
+
+
+// function to create chosenWord blank spaces
+function createBlankWord (word) {
+	for(count = 0; count < hangWords[word].length; count++){
+		var createdElement = document.createElement("BUTTON");
+		var theText = document.createTextNode("_");
+		createdElement.appendChild(theText);
+		createdElement.setAttribute('class', "myWordSpaces");
+		document.getElementById("chosenWord").appendChild(createdElement);
+	}
+
+	// using this as a placeholder for the currentWord.. sort of a pseudo 'global variable'
+	document.getElementById("currentWord").innerHTML = hangWords[word];
+}
+
+function getSaiyanClip (clipNumber) {
+	var myVideo = document.getElementById("saiyan");
+	var saiyanSource = "assets/Kamehameha_clip" + clipNumber + ".mp4";
+	myVideo.src = saiyanSource;
+	myVideo.load();
+
+	// set letterBox window to hidden when video starts to play
+	document.getElementById("letterBox").style.visibility = "hidden";
+	document.getElementById("infoBox").style.visibility = "hidden";		
+	
+	myVideo.play();
+	myVideo.onended = function() {
+	// when video ends set letterBox window back to visible 
+	document.getElementById("letterBox").style.visibility = "visible";
+	document.getElementById("infoBox").style.visibility = "visible"; 
+	}
+}
+
+function playShotgun(){
+	var sound = document.getElementById("shotty");
+	sound.play();
+
+}
+
+
+
+
+// function to check if the chosenLetter is included in the chosenWord
+function checkChosenLetter (pick, choice) {
+	var tempWord = document.getElementById("currentWord").innerHTML;
+
+    // if (hangWords[3].includes(pick)) {
+    	if (tempWord.includes(pick)) {
+
+		// pick is inside of the word so set choice to TRUE
+		choice = true;
+		playShotgun();
+        // get position of chosenLetter and update chosenWord
+	        for(letterCount = 0; letterCount < tempWord.length ; letterCount++){
+	        	if(pick == tempWord.charAt(letterCount)){
+	        	//change blank space to chosenLetter and show the chosenLetter in the correct blank space
+	        	var letterCheck = document.getElementById("chosenWord");
+	        	letterCheck.getElementsByTagName("BUTTON")[letterCount].innerHTML = pick;
+	        	}
+	        }
+		}
+     	else {        
+        	// pick is NOT inside the word so set choice to FALSE
+        	choice = false;
+    		}
+    return choice;
+}
+
+// ----------------------------------------------------------------------------------------- game start 
+
+// press any key to start the game
+// function pressAnyKey(keyCheck) {
+// 		console.log("inside pressAnyKey.........keyCheck value = " + keyCheck);
+// 		document.onkeypress = function(event){
+// 		var regularKeypress = new RegExp("[a-z]|[0-9]", "i");
+
+//         var keyPressed = event.keyCode || event.which;
+//         var RealValue = String.fromCharCode(keyPressed);
+//         // do something with key        
+//         console.log(" Key pressed =  " + keyPressed + "   RealValue = " + RealValue);
+//         console.log(regularKeypress.test(RealValue));
+//         if(regularKeypress.test(RealValue)) {
+//         	keyCheck = true;
+//         }
+//         console.log("keyCheck value = " + keyCheck);
+//         return keyCheck;
+//     };
+
+
+
+// }
+
+
+function addLetterUsed(letter){
+    var oldLetters = document.getElementById("lettersUsed").innerHTML;
+    document.getElementById("lettersUsed").innerHTML = (oldLetters + " " +letter);
+ }
+
+function myButtonFunction(buttonPick) {
+	var vid =document.getElementById("saiyan");
+	var chosenLetter = buttonPick;
+	var validLetter = false; // default value is false
+
+	//add chosen letter to lettersUsed
+    addLetterUsed(chosenLetter);
+
+
+	validLetter = checkChosenLetter(chosenLetter, validLetter);
+
+	// set clicked button to hidden
+	document.getElementById(buttonPick).style.visibility = "hidden";
+
+	if (!validLetter){
+		// if the picked letter is not in the word then increment 'bad' counter
+		badCounter++;
+
+		// decrease guessess remaining
+		var badGuess = 6 - badCounter;
+
+		// var badGuess = Number(document.getElementById("remainingGuesses").innerHTML) - 1;
+		document.getElementById("remainingGuesses").innerHTML =  "Guesses remaining: " + badGuess; // string math !!!
+		getSaiyanClip(badCounter);
+	}
+}
+function startGame() {	
+	var word = 0;
+	// for(word = 0; word < hangWords.length; word++){
+	createBlankWord(word);
+}
+
+window.onload = function(){
+	var wordNumber = 0;
+	prompt("Press any key to continue !!");
+	var vid = document.getElementById("saiyan");
+	document.getElementById("letterBox").style.visibility = "hidden";
+	document.getElementById("infoBox").style.visibility = "hidden";
+	vid.play();
+	
+		// game start
+		vid.onended = function() {
+			// when video ends set letterBox window back to visible 
+	 		document.getElementById("letterBox").style.visibility = "visible";
+	 		document.getElementById("infoBox").style.visibility = "visible";
+	 		startGame();			
+		}
+}
+
+	// if(vid.currentTime > 5){
+	// 	console.log("Time is --------> " + vid.currentTime);
+	// }
+
+
+
+// var randomWordPick = hangWords[Math.floor((Math.random() * (hangWords.length)) + 0)];
+
+// pseudo game loop ...by words chosen from hangWords
+//console.log("The chosen word -------> " +hangWords[3]);
+
+var scene1Time = '0:10';
+var checkKeyPress = false;
+
+	
+
+    // I totally forgot what I was doing here ?!?!?!?! ...i think this was keyboard presses but I went with onscreen buttons for phone and tablet    -------------
+	// pressAnyKey(checkKeyPress);
+	if(checkKeyPress){
+	vid.play();
+	vid.onended = function() {
+		}
+	}
+
+	//-------------------------------------------------------------
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
+
+
+<!-- function code(e) {
+    e = e || window.event;
+    return(e.keyCode || e.which);
+}
+window.onload = function(){
+    document.onkeypress = function(e){
+        var key = code(e);
+        // do something with key
+    };
+}; -->

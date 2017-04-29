@@ -1,0 +1,103 @@
+body {
+  font-family: 'Macondo', cursive;
+  font-size: 18px;
+  line-height: 34px;
+  color: #777;  
+}
+
+.jumbotron {
+	background: url("../assets/game_background.png")  ;
+	background-size: 100%;
+	padding-top: 0px;
+}
+
+.container {
+	width: 400px;
+}
+
+
+.myBorder{
+	border-style: solid;	
+	border-color: red;
+	border-width: 1px;
+}
+
+.myHeader{
+	font-family: 'Macondo', cursive;
+	background-color: yellow;
+	color: black;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 5px;
+}
+
+.myFooter{
+	font-family: 'Macondo', cursive;
+	background-color: yellow;
+	color: black;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+
+.gameWindow{
+	/*width: 400px;*/
+	width: 50%;
+	float: left;
+	border-style: solid;	
+	border-color: red;
+	border-width: 1px;
+	margin: 10px;
+}
+
+.letterWindow{
+	width: 40%;
+	margin: 10px;
+	color: white;
+	float: left;
+	border-style: solid;	
+	border-color: red;
+	border-width: 1px;
+	padding: 5px;
+	background-color: gray;
+
+}
+
+#currentWord {
+	display: none;
+}
+
+
+.infoWindow{
+	width: 40%;
+	margin: 10px;
+	padding: 5px;
+
+	color: white;
+
+	min-height: 100px;
+
+	float: left;
+	border-style: solid;	
+	border-color: red;
+	border-width: 1px;
+	background-color: gray;
+
+}
+
+.myLetterBtn{
+	border-radius: 24px;
+	margin: 2px;
+	font-family: 'Macondo', cursive;
+}
+
+
+.myWordSpaces{
+	border-radius: 24px;
+	margin: 5px;
+	font-family: 'Macondo', cursive;
+	font-size: 36px;
+	padding: 10px 16px;
+}
+
+
